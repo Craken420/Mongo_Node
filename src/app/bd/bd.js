@@ -82,9 +82,16 @@ var callback = function (err, data) {
     Todo.findById(id, callback)
   }
 
-/* Update */
+/*
+* Update
+* Model.update(conditions, update, [options], [callback])
+*/
 
-  // Update task by ID
+  /* 
+  * Update task by ID
+  * Example: editTask('606c91a17c08ea109c0e0eda',
+  *   {name: 'New title task', completed: true, note: 'New note'})
+  */
   const editTask = function (id, task) {
     Todo.findById(id, function (err, result) {
       if (err)
@@ -97,4 +104,17 @@ var callback = function (err, data) {
     })
   }
 
-  editTask('606c91a17c08ea109c0e0eda', {name: 'New title task', completed: true, note: 'New note'})
+  // Update multiple tasks from complete true to false
+  const setFalseAllMaterTasks = function () {
+    Todo.update({ name: /master/i }, { completed: false }, { multi: true }, callback)
+  }
+
+  Todo.find({name: /Master/}, function(err, tasks) {
+    console.log('Before Edit next: ', tasks)
+  })
+
+  setFalseAllMaterTasks()
+
+  Todo.find({name: /Master/}, function(err, tasks) {
+    console.log('Afeter Edit next: ', tasks)
+  })
