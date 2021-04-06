@@ -6,6 +6,7 @@ const dbURI = 'mongodb://localhost/todoAppTest'
 const dbOpc = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+  useFindAndModify: false
 }
 
 mongoose.connect(dbURI, dbOpc).then(
@@ -81,4 +82,19 @@ var callback = function (err, data) {
     Todo.findById(id, callback)
   }
 
-  getTaskById('606c91a17c08ea109c0e0eda')
+/* Update */
+
+  // Update task by ID
+  const editTask = function (id, task) {
+    Todo.findById(id, function (err, result) {
+      if (err)
+        console.log('err: ', err)
+      else
+        Todo.findByIdAndUpdate(id, {
+          name: task.name,
+          completed: task.completed,
+          note: task.note}, callback)
+    })
+  }
+
+  editTask('606c91a17c08ea109c0e0eda', {name: 'New title task', completed: true, note: 'New note'})
