@@ -71,9 +71,14 @@ var callback = function (err, data) {
   const oneYearAgo = new Date();
 
   const getMastStartNoComplOfYearAgo = function () {
-    oneYearAgo.setYear(oneYearAgo.getFullYear() - 1);
+    oneYearAgo.setYear(oneYearAgo.getFullYear() - 1)
     Todo.find({name: /^Master/, completed: false })
-      .where('updated_at').gt(oneYearAgo).exec(callback);
+      .where('updated_at').gt(oneYearAgo).exec(callback)
   }
 
-  getMastStartNoComplOfYearAgo()
+  // Get a Task by ID
+  const getTaskById = function (id) {
+    Todo.findById(id, callback)
+  }
+
+  getTaskById('606c91a17c08ea109c0e0eda')
