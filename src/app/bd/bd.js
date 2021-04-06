@@ -38,12 +38,15 @@ const newTask = function (name, note) {
     })
 }
 
+// Callback function to avoid duplicating it all over
+var callback = function (err, data) {
+  if (err) { return console.error(err); }
+  else { console.log(data); }
+}
+
 // Find all data in the Todo collection
 const showTaks = function () {
-  Todo.find(function (err, todos) {
-      if (err) return console.error(err)
-      console.log(todos)
-  })
+  Todo.find(callback)
 }
 
 showTaks()
