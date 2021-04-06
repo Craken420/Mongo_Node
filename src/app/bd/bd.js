@@ -28,20 +28,16 @@ const TodoSchema = new mongoose.Schema({
 
 const Todo = mongoose.model('Todo', TodoSchema);
 
-// Create and save
-const newTask = function (name, note) {
-    var todo = new Todo({name: name, completed: false, note: note})
-
-    todo.save(function (err){
-        if (err) console.log(err)
-        else console.log(todo)
-    })
-}
-
 // Callback function to avoid duplicating it all over
 var callback = function (err, data) {
   if (err) { return console.error(err); }
   else { console.log(data); }
+}
+
+// Create and save
+const newTask = function (name, note) {
+    var todo = new Todo({name: name, completed: false, note: note})
+    todo.save(callback)
 }
 
 /* Querys */
@@ -116,18 +112,11 @@ var callback = function (err, data) {
   }
 
 /* Delete */
-  /* 
-  * Update task by ID
-  * Example: editTask('606c91a17c08ea109c0e0eda',
-  *   {name: 'New title task', completed: true, note: 'New note'})
-  */
+
+  // Delete task by ID
   const deleteTask = function (id) {
-    Todo.findByIdAndRemove(id, function (err, task) {
-      if (err)
-        console.log('err: ', err)
-      else
-        console.log('Deleted: ', task)
-    })
+    Todo.findByIdAndRemove(id, callback)
   }
-  deleteTask('606c8a9ab55102440cbb1529')
-  getTaskById('606c8a9ab55102440cbb1529')
+  deleteTask('606c91a17c08ea109c0e0eda')
+  getTaskById('606c91a17c08ea109c0e0eda')
+
