@@ -57,6 +57,14 @@ var callback = function (err, data) {
 
   // Get all tasks ending with `JS`
   const getEndWithJS = function () {
-    Todo.find({name: /JS$/ }, callback);
+    Todo.find({name: /JS$/ }, callback)
   }
-  getEndWithJS()
+
+/* Multi-Querys */
+
+  // Get all tasks staring with `Master` and complete
+  const getMastStartNComplet = function () {
+    Todo.find({name: /^Master/, completed: true }, callback)
+  }
+
+  getMastStartNComplet()
