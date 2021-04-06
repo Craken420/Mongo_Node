@@ -115,12 +115,19 @@ var callback = function (err, data) {
     Todo.findOneAndUpdate({name: /Master/ }, {completed: true}, callback);
   }
 
-  Todo.find({name: /Master/}, function(err, tasks) {
-    console.log('Before Edit next: ', tasks)
-  })
-
-  setTrueAllMaterTasks()
-
-  Todo.find({name: /Master/}, function(err, tasks) {
-    console.log('Afeter Edit next: ', tasks)
-  })
+/* Delete */
+  /* 
+  * Update task by ID
+  * Example: editTask('606c91a17c08ea109c0e0eda',
+  *   {name: 'New title task', completed: true, note: 'New note'})
+  */
+  const deleteTask = function (id) {
+    Todo.findByIdAndRemove(id, function (err, task) {
+      if (err)
+        console.log('err: ', err)
+      else
+        console.log('Deleted: ', task)
+    })
+  }
+  deleteTask('606c8a9ab55102440cbb1529')
+  getTaskById('606c8a9ab55102440cbb1529')
