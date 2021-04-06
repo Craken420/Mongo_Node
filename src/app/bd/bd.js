@@ -3,7 +3,12 @@ const mongoose = require('mongoose')
 // Db connection
 const dbURI = 'mongodb://localhost/todoAppTest'
 
-mongoose.connect(dbURI).then(
+const dbOpc = {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+}
+
+mongoose.connect(dbURI, dbOpc).then(
     () => {
       console.log("Database connection established!")
     },
@@ -33,8 +38,8 @@ const newTask = function (name, note) {
     })
 }
 
+// Find all data in the Todo collection
 const showTaks = function () {
-  // Find all data in the Todo collection
   Todo.find(function (err, todos) {
       if (err) return console.error(err)
       console.log(todos)
