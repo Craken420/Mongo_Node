@@ -4,7 +4,7 @@
   "description": "This is the basic use in node about connect mongodb",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon src/index.js"
   },
   "keywords": [
     "nodejs",
@@ -13,5 +13,10 @@
   ],
   "author": "Luis Angel Peña Zuñiga",
   "license": "ISC",
-  "dependencies": {}
+  "dependencies": {
+    "mongoose": "^5.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
 }
