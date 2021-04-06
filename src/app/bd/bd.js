@@ -85,6 +85,7 @@ var callback = function (err, data) {
 /*
 * Update
 * Model.update(conditions, update, [options], [callback])
+* Model.findOneAndUpdate([conditions], [update], [options], [callback])
 */
 
   /* 
@@ -106,14 +107,19 @@ var callback = function (err, data) {
 
   // Update multiple tasks from complete true to false
   const setFalseAllMaterTasks = function () {
-    Todo.update({ name: /master/i }, { completed: false }, { multi: true }, callback)
+    Todo.update({ name: /Master/ }, { completed: false }, { multi: true }, callback)
+  }
+
+  // Update one Mater task from complete true to false
+  const setTrueAllMaterTasks = function () {
+    Todo.findOneAndUpdate({name: /Master/ }, {completed: true}, callback);
   }
 
   Todo.find({name: /Master/}, function(err, tasks) {
     console.log('Before Edit next: ', tasks)
   })
 
-  setFalseAllMaterTasks()
+  setTrueAllMaterTasks()
 
   Todo.find({name: /Master/}, function(err, tasks) {
     console.log('Afeter Edit next: ', tasks)
