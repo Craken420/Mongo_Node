@@ -25,7 +25,6 @@ const TodoSchema = new mongoose.Schema({
   updated_at: { type: Date, default: Date.now },
 })
 
-// Create and save
 const Todo = mongoose.model('Todo', TodoSchema);
 
 // Create and save
@@ -44,9 +43,16 @@ var callback = function (err, data) {
   else { console.log(data); }
 }
 
-// Find all data in the Todo collection
-const showTaks = function () {
-  Todo.find(callback)
-}
+/* Querys */
 
-showTaks()
+  // Find all data in the Todo collection
+  const showTaks = function () {
+    Todo.find(callback)
+  }
+
+  // Get only completed tasks
+  const getCompletTasks = function () {
+    Todo.find({completed: true }, callback)
+  }
+
+  getCompletTasks()
