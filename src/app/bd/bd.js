@@ -67,4 +67,13 @@ var callback = function (err, data) {
     Todo.find({name: /^Master/, completed: true }, callback)
   }
 
-  getMastStartNComplet()
+  // Get all tasks staring with `Master`, not completed and created from year ago to now...
+  const oneYearAgo = new Date();
+
+  const getMastStartNoComplOfYearAgo = function () {
+    oneYearAgo.setYear(oneYearAgo.getFullYear() - 1);
+    Todo.find({name: /^Master/, completed: false })
+      .where('updated_at').gt(oneYearAgo).exec(callback);
+  }
+
+  getMastStartNoComplOfYearAgo()
