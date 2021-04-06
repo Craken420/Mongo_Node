@@ -55,4 +55,8 @@ var callback = function (err, data) {
     Todo.find({completed: true }, callback)
   }
 
-  getCompletTasks()
+  // Get all tasks ending with `JS`
+  const getEndWithJS = function () {
+    Todo.find({name: /JS$/ }, callback);
+  }
+  getEndWithJS()
