@@ -19,3 +19,18 @@ const TodoSchema = new mongoose.Schema({
   note: String,
   updated_at: { type: Date, default: Date.now },
 })
+
+// Create and save
+const Todo = mongoose.model('Todo', TodoSchema);
+
+// Create and save
+const newTask = function (name, note) {
+    var todo = new Todo({name: name, completed: false, note: note})
+
+    todo.save(function (err){
+        if (err) console.log(err)
+        else console.log(todo)
+    })
+}
+
+newTask('Add Task in Todo List', 'Todo task details')
