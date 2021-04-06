@@ -35,8 +35,8 @@ var callback = function (err, data) {
 }
 
 // Create and save
-const newTask = function (name, note) {
-    var todo = new Todo({name: name, completed: false, note: note})
+const newTask = function (task) {
+    var todo = new Todo({name: task.name, completed: false, note: task.note})
     todo.save(callback)
 }
 
@@ -117,6 +117,15 @@ const newTask = function (name, note) {
   const deleteTask = function (id) {
     Todo.findByIdAndRemove(id, callback)
   }
-  deleteTask('606c91a17c08ea109c0e0eda')
-  getTaskById('606c91a17c08ea109c0e0eda')
 
+  // Multi-Delete with multiple filter
+  const deleteNewTask = function () {
+    Todo.deleteMany({name: /New/, note: /No/}, callback)
+  }
+
+  // newTask({name: 'New Task café', note: 'No Note'})
+  // newTask({name: 'New Task cafe', note: 'No Note'})
+  // newTask({name: 'New Task cafE', note: 'No Note'})
+  // newTask({name: 'New Task lo', note: 'No Note'})
+  // newTask({name: 'New Task ik', note: 'No Note'})
+  deleteNewTask()
