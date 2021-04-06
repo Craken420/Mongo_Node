@@ -33,4 +33,12 @@ const newTask = function (name, note) {
     })
 }
 
-newTask('Add Task in Todo List', 'Todo task details')
+const showTaks = function () {
+  // Find all data in the Todo collection
+  Todo.find(function (err, todos) {
+      if (err) return console.error(err)
+      console.log(todos)
+  })
+}
+
+showTaks()
