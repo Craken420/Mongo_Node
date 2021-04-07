@@ -11,6 +11,7 @@ router.get('/CompletTasks', TaskCtrl.getCompletTasks);
 router.get('/EndWithJS', TaskCtrl.getEndWithJS);
 router.get('/MastStartNComplet', TaskCtrl.getMastStartNComplet);
 router.get('/PremNoComplOfYearAgo', TaskCtrl.getPremNoComplOfYearAgo);
+router.get('/Special', TaskCtrl.getSpecial);
 
 router.route('/SetFalseAllMaterTasks').put(TaskCtrl.setFalseAllMaterTasks);
 router.route('/SetTrueAllMaterTasks').put(TaskCtrl.setTrueAllMaterTasks);

@@ -36,6 +36,39 @@ taskCtrl.newTask = async function (req, res) {
         res.status(200).send(tasks)
     }
 
+/* Logical Query Operators */
+    taskCtrl.getSpecial = async function (req, res) {
+        let tasks = await Todo.find( {
+            $and: [
+                {
+                    $or: [
+                        {
+                            completed: false,
+                            impact: {
+                                $lt : 500,
+                                $gt: 51,
+                                $exists: true,
+                                $nin: [ 310, 320 ]
+                            }
+                        },
+                        {
+                            completed: true,
+                            impact : { $lt : 500 }
+                        }
+                    ]
+                },
+                {
+                    name: {
+                        $not: { $regex: "Beginer", $options: 'i' },
+                        $in: [ /js$/i, /css$/i ]
+                    }
+                }
+            ],
+            $nor: [{ impact: 350 }]
+        })
+        res.status(200).send(tasks)
+    }
+
 /* Multi-Querys */
 
     // Get all tasks staring with `Master` and complete
