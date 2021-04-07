@@ -17,5 +17,6 @@ app.use(bodyParser.urlencoded({ extended: false}));
 
 // Routes
 app.use('/api/todo', require('./routes/task-routes'));
+app.use('/api/users', require('./routes/user-routes'));
 
 module.exports = app;
