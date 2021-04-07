@@ -12,4 +12,7 @@ router.route('/:userId')
     .put(UserCtrl.updateUser)
     .delete(UserCtrl.deleteUser);
 
+router.route('/:userId/todo')
+    .get(UserCtrl.getUserTodo)
+
 module.exports = router

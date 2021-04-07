@@ -6,10 +6,10 @@ const TodoSchema = new Schema({
     completed: Boolean,
     note: String,
     impact: Number,
-    user: [{
+    user: {
       type: Schema.Types.ObjectId,
       ref: 'User'
-    }]
+    }
   },
   {
     timestamps: true,

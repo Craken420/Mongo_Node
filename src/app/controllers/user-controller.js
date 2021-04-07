@@ -29,4 +29,9 @@ UserCtrl.deleteUser = async function (req, res) {
     res.status(200).send({'message': 'User Removed!!!'})
 }
 
+UserCtrl.getUserTodo = async function (req, res) {
+    let userTodo = await User.findById(req.params.userId).populate('todo')
+    res.status(200).send(userTodo)
+}
+
 module.exports = UserCtrl;
