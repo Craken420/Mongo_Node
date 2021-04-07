@@ -30,3 +30,10 @@ DELETE http://localhost:3000/api/todo/606dea458bf31f301c2327da
 
 ###
 DELETE http://localhost:3000/api/todo/DeleteNewTasks
+
+###
+GET http://localhost:3000/api/users/
+
+###
+GET http://localhost:3000/api/users/606e04ddf5e43646585ae761/todo
+

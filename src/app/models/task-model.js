@@ -1,10 +1,15 @@
-const mongoose = require('mongoose')
-
-const TodoSchema = new mongoose.Schema({
+const mongoose = require('mongoose'),
+      {Schema, model} = mongoose
+  
+const TodoSchema = new Schema({
     name: String,
     completed: Boolean,
     note: String,
-    impact: Number
+    impact: Number,
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: 'User'
+    }
   },
   {
     timestamps: true,
@@ -12,4 +17,4 @@ const TodoSchema = new mongoose.Schema({
   }
 )
 
-module.exports = mongoose.model('Todo', TodoSchema)
+module.exports = model('Todo', TodoSchema)
