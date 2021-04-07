@@ -4,7 +4,12 @@ const TodoSchema = new mongoose.Schema({
     name: String,
     completed: Boolean,
     note: String,
-    updated_at: { type: Date, default: Date.now },
-  })
+    impact: Number
+  },
+  {
+    timestamps: true,
+    versionKey: false
+  }
+)
 
 module.exports = mongoose.model('Todo', TodoSchema)
