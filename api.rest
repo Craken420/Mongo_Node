@@ -1,29 +1,32 @@
 ###
-GET http://localhost:3000/api/employees
+GET http://localhost:3000/api/todo
 
 ###
-POST http://localhost:3000/api/employees
-Content-Type: application/json
-
-{
-    "name": "foo",
-    "position": "lider",
-    "office": "programer",
-    "salary": "200"
-}
+GET http://localhost:3000/api/todo/606dcf8cad54d13b6c3d5a3b
 
 ###
-GET http://localhost:3000/api/employees/60210f3f3380462120196794
-
-
-###
-DELETE http://localhost:3000/api/employees/60210f3f3380462120196794
+GET http://localhost:3000/api/todo/CompletTasks
 
 ###
-PUT http://localhost:3000/api/employees/602112cf0f7a151f1cfbe01f
-Content-Type: application/json
+GET http://localhost:3000/api/todo/EndWithJS
 
-{
-    "salary": 400
-}
+###
+GET http://localhost:3000/api/todo/MastStartNComplet
 
+###
+GET http://localhost:3000/api/todo/PremNoComplOfYearAgo
+
+###
+GET http://localhost:3000/api/todo/Special
+
+###
+PUT http://localhost:3000/api/todo/SetFalseAllMaterTasks
+
+###
+PUT http://localhost:3000/api/todo/SetTrueFirstReactTasks
+
+###
+DELETE http://localhost:3000/api/todo/606dea458bf31f301c2327da
+
+###
+DELETE http://localhost:3000/api/todo/DeleteNewTasks

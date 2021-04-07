@@ -116,8 +116,8 @@ taskCtrl.newTask = async function (req, res) {
     }
 
     // Update one Mater task from complete true to false
-    taskCtrl.setTrueAllMaterTasks = async function (req, res) {
-        await Todo.findOneAndUpdate({name: /Master/ }, {completed: true});
+    taskCtrl.setTrueFirstReactTasks = async function (req, res) {
+        await Todo.findOneAndUpdate({name: /React/ }, {completed: true});
         res.status(200).send({"message": 'EditedTasks'});
     }
 

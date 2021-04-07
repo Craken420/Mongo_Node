@@ -14,7 +14,7 @@ router.get('/PremNoComplOfYearAgo', TaskCtrl.getPremNoComplOfYearAgo);
 router.get('/Special', TaskCtrl.getSpecial);
 
 router.route('/SetFalseAllMaterTasks').put(TaskCtrl.setFalseAllMaterTasks);
-router.route('/SetTrueAllMaterTasks').put(TaskCtrl.setTrueAllMaterTasks);
+router.route('/SetTrueFirstReactTasks').put(TaskCtrl.setTrueFirstReactTasks);
 
 router.route('/DeleteNewTasks').delete(TaskCtrl.deleteNewTasks);
 
