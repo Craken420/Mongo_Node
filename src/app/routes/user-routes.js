@@ -14,5 +14,6 @@ router.route('/:userId')
 
 router.route('/:userId/todo')
     .get(UserCtrl.getUserTodo)
+    .post(UserCtrl.newUserTask);
 
 module.exports = router

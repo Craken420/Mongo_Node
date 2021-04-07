@@ -34,4 +34,17 @@ UserCtrl.getUserTodo = async function (req, res) {
     res.status(200).send(userTodo)
 }
 
+UserCtrl.newUserTask = async function (req, res) {
+    let todo = await new Todo(req.body)
+    todo.completed = false
+    let user = await User.findById(req.params.userId)
+    todo.user = user
+    await todo.save()
+
+    user.todo.push(todo)
+    await user.save()
+
+    res.status(200).send({'message': 'CreateTask'});
+}
+
 module.exports = UserCtrl;
