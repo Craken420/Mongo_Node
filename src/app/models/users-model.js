@@ -1,3 +1,5 @@
+const jwt = require('jsonwebtoken')
+
 const mongoose = require('mongoose'),
       {Schema, model} = mongoose
 
@@ -8,6 +10,12 @@ const userSchema = Schema({
     todo: [{
         type: Schema.Types.ObjectId,
         ref: 'Todo'
+    }],
+    tokens: [{
+        token: {
+            type: String,
+             required: true
+         }
     }]
 },
 {
@@ -15,4 +23,6 @@ const userSchema = Schema({
     versionKey: false
 })
 
-module.exports = model('User', userSchema);
+const User = mongoose.model('User', userSchema);
+
+module.exports = User;

@@ -18,11 +18,16 @@ UserCtrl.getUserByID = async function (req, res) {
 }
 
 UserCtrl.newUser = async function (req, res) {
-    let user = await new User(req.body)
-    await user.save((err, user) => {
-        if (err) res.status(500).send(err.message);
-        else res.status(200).send(user)
-    })
+    try {
+        let user = new User(req.body);
+        const token = jwt.sign({ _id: user._id}, process.env.JWT_KEY);
+        user.tokens = user.tokens.concat({token});
+        await user.save();
+        res.status(200).send({user})
+    }
+    catch (err) {
+        res.status(500).send(err.message)
+    };
 }
 
 UserCtrl.updateUser = async function (req, res) {
