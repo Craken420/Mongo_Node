@@ -61,4 +61,18 @@ UserCtrl.newUserTask = async function (req, res) {
     res.status(200).send({'message': 'CreateTask'});
 }
 
+UserCtrl.login = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+        const user = await User.findByCredencials(email, password);
+        if (!user)
+            return res.status(401).send({
+                error: 'Login failed! Check authentication credentials'});
+        const token = await user.generateAuthToken();
+        res.send({ user, token });
+    } catch (err) {
+        res.status(400).send(err);
+    }
+};
+
 module.exports = UserCtrl;

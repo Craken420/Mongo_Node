@@ -32,6 +32,16 @@ userSchema.methods.generateAuthToken = async function() {
     return token;
 }
 
+userSchema.statics.findByCredencials = async function(email, password) {
+    // Search for a user by email and password.
+    const user = await User.findOne({email});
+    if (!user)
+        throw new Error({ error: 'Invalid login credencials' });
+    if (!password == user.password)
+        throw new Error({ error: 'Invalid login credencials'});
+    return user
+}
+
 const User = mongoose.model('User', userSchema);
 
 module.exports = User;
