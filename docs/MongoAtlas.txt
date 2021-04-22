@@ -1,0 +1,8 @@
+Help:: https://www.zeolearn.com/magazine/designing-a-rest-api-with-nodejs-and-mongodb-atlas
+Create youre acount in https://cloud.mongodb.com/
+Create a proyect
+Create a free cluster and click in ok
+Add in ip 0.0.0.0
+Create the user and password
+Select 2.2.12 or later
+Select coneect application and copy the code changing the password

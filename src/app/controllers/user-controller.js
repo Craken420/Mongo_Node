@@ -21,8 +21,7 @@ UserCtrl.newUser = async function (req, res) {
     try {
         let user = new User(req.body);
         await user.save();
-        const token = await user.generateAuthToken();
-        res.status(200).send({user, 'token': token})
+        res.status(200).send({user})
     }
     catch (err) {
         res.status(500).send(err.message)

@@ -4,10 +4,12 @@ const mongoose = require('mongoose')
 const dbOpc = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-  useFindAndModify: false
+  useFindAndModify: false,
+  reconnectTries: Number.MAX_VALUE,
+  poolSize: 10
 }
 
-mongoose.connect(process.env.MONGO_URL, dbOpc).then(
+mongoose.connect(process.env.MONGOATLAS_URL, dbOpc).then(
     () => {
       console.log("Database connection established!")
     },
