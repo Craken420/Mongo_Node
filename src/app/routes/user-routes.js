@@ -11,6 +11,8 @@ router.use(middleware.authToken);
 router.post('/logout', UserCtrl.logout);
 router.post('/logoutAll', UserCtrl.logoutAll);
 
+router.get('/me',  async(req, res) => res.send(req.user)); // View logged in user profile
+
 router.route('/')
     .get(UserCtrl.getAllUsers)
     .post(UserCtrl.newUser);
