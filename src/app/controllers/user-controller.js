@@ -60,6 +60,18 @@ UserCtrl.newUserTask = async function (req, res) {
     res.status(200).send({'message': 'CreateTask'});
 }
 
+UserCtrl.signin = async function (req, res) {
+    try {
+        let user = new User(req.body);
+        await user.save();
+        const token = await user.generateAuthToken();
+        res.status(200).send({user, 'token': token})
+    }
+    catch (err) {
+        res.status(500).send(err.message)
+    };
+}
+
 UserCtrl.login = async function (req, res) {
     try {
         const { email, password } = req.body;

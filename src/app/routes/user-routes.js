@@ -6,6 +6,8 @@ const middleware = require('../middlewares/middleware')
 
 router.post('/login', UserCtrl.login);
 
+router.post('/signin', UserCtrl.signin);
+
 router.use(middleware.authToken);
 
 router.post('/logout', UserCtrl.logout);
