@@ -1,12 +1,30 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
+const validator = require('validator');
 const mongoose = require('mongoose'),
       {Schema, model} = mongoose
 
 const userSchema = Schema({
-    name: String,
-    email: String,
-    password: String,
+    name: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    email: {
+        type: String,
+        required: true,
+        unique: true,
+        lowercase: true,
+        validate: value => {
+            if ( !validator.isEmail(value) )
+                throw new Error({error: 'Invalid Error Email address'})
+        }
+    },
+    password: {
+        type: String,
+        required: true,
+        minLength: 7
+    },
     todo: [{
         type: Schema.Types.ObjectId,
         ref: 'Todo'
@@ -52,6 +70,6 @@ userSchema.statics.findByCredencials = async function(email, password) {
     return user
 }
 
-const User = mongoose.model('User', userSchema);
+const User = model('User', userSchema);
 
 module.exports = User;

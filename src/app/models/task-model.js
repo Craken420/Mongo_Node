@@ -2,9 +2,15 @@ const mongoose = require('mongoose'),
       {Schema, model} = mongoose
   
 const TodoSchema = new Schema({
-    name: String,
+    name: {
+      type: String,
+      required: true
+    },
     completed: Boolean,
-    note: String,
+    note: {
+      type: String,
+      required: true
+    },
     impact: Number,
     user: {
       type: Schema.Types.ObjectId,
