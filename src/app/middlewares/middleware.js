@@ -18,14 +18,19 @@ middleware.authToken = async function (req, res, next) {
                 req.decoded = decoded;
             }
         });
-        const user = await User.findOne({ _id: req.decoded._id, 'tokens.token': token })
-        if (!user) {
-            var err = new Error("User token not found");
+        try {
+            const user = await User.findOne({ _id: req.decoded._id, 'tokens.token': token })
+            if (!user) {
+                var err = new Error("User token not found");
+                next(err);
+            }
+            req.user = user
+            req.token = token
+            next();
+        }
+        catch (err) {
             next(err);
         }
-        req.user = user
-        req.token = token
-        next();
     } else {
         var err = new Error("Token no proveída.");
         next(err);  //Error, trying to access unauthorized page!
