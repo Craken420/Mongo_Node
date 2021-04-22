@@ -61,7 +61,7 @@ UserCtrl.newUserTask = async function (req, res) {
     res.status(200).send({'message': 'CreateTask'});
 }
 
-UserCtrl.login = async (req, res) => {
+UserCtrl.login = async function (req, res) {
     try {
         const { email, password } = req.body;
         const user = await User.findByCredencials(email, password);

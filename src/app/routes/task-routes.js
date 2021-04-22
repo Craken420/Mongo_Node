@@ -1,7 +1,10 @@
 
-var TaskCtrl = require('../controllers/task-controller');
-var express = require('express');
-var router = express.Router();
+const TaskCtrl = require('../controllers/task-controller');
+const middleware = require('../middlewares/middleware')
+const express = require('express');
+const router = express.Router();
+
+router.use(middleware.authToken);
 
 router.route('/')
     .get(TaskCtrl.showTaks)

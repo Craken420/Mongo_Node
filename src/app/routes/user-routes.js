@@ -2,8 +2,11 @@ const express = require('express'),
       router = express.Router()
 
 const UserCtrl = require('../controllers/user-controller')
+const middleware = require('../middlewares/middleware')
 
-router.post('/login', UserCtrl.login)
+router.post('/login', UserCtrl.login);
+
+router.use(middleware.authToken);
 
 router.route('/')
     .get(UserCtrl.getAllUsers)
