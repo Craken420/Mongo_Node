@@ -18,11 +18,15 @@ UserCtrl.getUserByID = async function (req, res) {
 }
 
 UserCtrl.newUser = async function (req, res) {
-    let user = await new User(req.body)
-    await user.save((err, user) => {
-        if (err) res.status(500).send(err.message);
-        else res.status(200).send(user)
-    })
+    try {
+        let user = new User(req.body);
+        await user.save();
+        const token = await user.generateAuthToken();
+        res.status(200).send({user, 'token': token})
+    }
+    catch (err) {
+        res.status(500).send(err.message)
+    };
 }
 
 UserCtrl.updateUser = async function (req, res) {
@@ -56,5 +60,41 @@ UserCtrl.newUserTask = async function (req, res) {
 
     res.status(200).send({'message': 'CreateTask'});
 }
+
+UserCtrl.login = async function (req, res) {
+    try {
+        const { email, password } = req.body;
+        const user = await User.findByCredencials(email, password);
+        if (!user)
+            return res.status(401).send({
+                error: 'Login failed! Check authentication credentials'});
+        const token = await user.generateAuthToken();
+        res.send({ user, token });
+    } catch (err) {
+        res.status(400).send(err);
+    }
+};
+
+UserCtrl.logout = async (req, res) => {
+    try {
+        req.user.tokens = req.user.tokens.filter((token) => {
+            return token.token != req.token;
+        })
+        await req.user.save();
+        res.send('Logged Out');
+    } catch(error) {
+        res.status(500).send(error);
+    }
+};
+
+UserCtrl.logoutAll = async (req, res) => {
+    try {
+        req.user.tokens.splice(0, req.user.tokens.length);
+        await req.user.save();
+        res.send('All Logged Out')
+    } catch (error) {
+        res.status(500).send(error)
+    }
+};
 
 module.exports = UserCtrl;
