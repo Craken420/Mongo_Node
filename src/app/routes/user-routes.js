@@ -8,6 +8,9 @@ router.post('/login', UserCtrl.login);
 
 router.use(middleware.authToken);
 
+router.post('/logout', UserCtrl.logout);
+router.post('/logoutAll', UserCtrl.logoutAll);
+
 router.route('/')
     .get(UserCtrl.getAllUsers)
     .post(UserCtrl.newUser);

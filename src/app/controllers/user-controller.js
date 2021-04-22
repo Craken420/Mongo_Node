@@ -75,4 +75,26 @@ UserCtrl.login = async function (req, res) {
     }
 };
 
+UserCtrl.logout = async (req, res) => {
+    try {
+        req.user.tokens = req.user.tokens.filter((token) => {
+            return token.token != req.token;
+        })
+        await req.user.save();
+        res.send('Logged Out');
+    } catch(error) {
+        res.status(500).send(error);
+    }
+};
+
+UserCtrl.logoutAll = async (req, res) => {
+    try {
+        req.user.tokens.splice(0, req.user.tokens.length);
+        await req.user.save();
+        res.send('All Logged Out')
+    } catch (error) {
+        res.status(500).send(error)
+    }
+};
+
 module.exports = UserCtrl;
